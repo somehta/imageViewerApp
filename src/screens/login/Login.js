@@ -32,7 +32,7 @@ class Login extends Component {
     loginClickHandler = () => {
         let mockUserName = "sourabh";
         let mockPassword = "sourabh";
-        let accessToken ="xyz";
+        let accessToken ="IGQVJXcWVHam5oSFRBTHZAhZAnhpNEFtend2UmxXREF1WWRWVnNQOEpQTk1nWndLdm80ZAWFETDAySVhucnFjSDB4aGZAUMW5fNk9WVnBsZA2Vha3dCSUFsV3JJYldFNHRXTUFOSjdoRGxBV0phZA3dSM2dTMQZDZD";
         this.state.username === "" ? this.setState({ usernameRequired: "dispBlock" }) : this.setState({ usernameRequired: "dispNone" });
         this.state.loginPassword === "" ? this.setState({ loginPasswordRequired: "dispBlock" }) : this.setState({ loginPasswordRequired: "dispNone" });
 

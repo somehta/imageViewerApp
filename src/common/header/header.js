@@ -20,11 +20,17 @@ class Header extends Component{
         this.setState({anchorEl : event.currentTarget})
       };
     
-     handleMyProfileClose = () => {
+    handleMyProfileClose = () => {
         this.setState({anchorEl : null})
       };
       
-
+    logoutHandler = (e) => {
+        sessionStorage.removeItem("access-token");
+        this.setState({
+            loggedIn: false
+        });
+        this.history.pushState("/");
+    }
     
      myAccountHandler = () =>{
     
@@ -58,7 +64,7 @@ class Header extends Component{
                                 >
                                     <MenuItem onClick={this.myAccountHandler}>My Account</MenuItem>
                                     <hr/>
-                                    <MenuItem onClick={this.handleMyProfileClose}>Logout</MenuItem>
+                                    <MenuItem onClick={this.logoutHandler}>Logout</MenuItem>
                                 </Menu>
                             </div>
                     }
