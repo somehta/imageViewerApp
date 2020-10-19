@@ -3,6 +3,7 @@ import './App.css';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import Login from './screens/login/Login';
 import Home from './screens/home/Home';
+import Profile from './screens/profile/Profile';
 
 class App extends Component {
   constructor() {
@@ -16,6 +17,7 @@ class App extends Component {
        <div>
          <Route exact path ="/" render={({history}, props) =><Login history ={history} {...props}/>}/>
          <Route exact path="/home" render={({history},props) =><Home history ={history} {...props} baseUrl={this.baseUrl}/>}/>
+         <Route exact path="/profile" render={({history},props) =><Profile history ={history} {...props} baseUrl={this.baseUrl}/>}/>
        </div>
        </Router>
     )
