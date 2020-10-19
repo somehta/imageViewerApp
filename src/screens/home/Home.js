@@ -50,7 +50,7 @@ class Home extends Component {
                 that.setState({
                     allInstaPosts: responseData
                 });
-                console.log(responseData);
+                //console.log(responseData);
                 that.fetchPostDetails(responseData);
             }
         });
@@ -64,8 +64,6 @@ class Home extends Component {
         let thisThat = this;
         let arrayOfDetails = [];
         for (let newPostdetail of apiResponse) {
-            console.log("Hiiiiii");
-            console.log(newPostdetail.id);
             let dataPost = null;
             let xhrPostDetails = new XMLHttpRequest();
 
@@ -92,7 +90,6 @@ class Home extends Component {
                     thisThat.setState({
                         allPostDetails: arrayOfDetails
                     });
-                    console.log(arrayOfDetails);
                 }
             });
 
@@ -106,7 +103,6 @@ class Home extends Component {
     }
 
     likeClickHandler = (index) => {
-        //console.log("index", index);
         const tempPostsData = this.state.allPostDetails;
         const currentState = tempPostsData[index].liked;
         tempPostsData[index].liked = !currentState;
@@ -127,7 +123,6 @@ class Home extends Component {
     }
 
     addCommentHandler = (index, commentValue) => {
-        console.log(commentValue);
         const tempPostsData = this.state.allPostDetails;
         var updatedComments = [...(tempPostsData[index].commentsList),(commentValue)];
         tempPostsData[index].commentsList = updatedComments;
