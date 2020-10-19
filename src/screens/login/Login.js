@@ -32,7 +32,8 @@ class Login extends Component {
     loginClickHandler = () => {
         let mockUserName = "sourabh";
         let mockPassword = "sourabh";
-        let accessToken ="IGQVJXcWVHam5oSFRBTHZAhZAnhpNEFtend2UmxXREF1WWRWVnNQOEpQTk1nWndLdm80ZAWFETDAySVhucnFjSDB4aGZAUMW5fNk9WVnBsZA2Vha3dCSUFsV3JJYldFNHRXTUFOSjdoRGxBV0phZA3dSM2dTMQZDZD";
+        let userIdFortoken = "17841443893435948";
+        let accessToken ="IGQVJYb2VhVFgwVlFuQ1lhSDMxR1FyUnNpUFNCcU5mZAmFMNUxxcVhrREp4SnNEb2lIQ1V0cTJJZADg5aWwtNXJnelItSm1uTmJ1NUxaRWdUUnp0Vk0wSWVrdTNKV1FsdzR2U0U2bW5wbjVxa0xEc09ac0pBMHZAMWEFzUmNv";
         this.state.username === "" ? this.setState({ usernameRequired: "dispBlock" }) : this.setState({ usernameRequired: "dispNone" });
         this.state.loginPassword === "" ? this.setState({ loginPasswordRequired: "dispBlock" }) : this.setState({ loginPasswordRequired: "dispNone" });
 
@@ -41,6 +42,7 @@ class Login extends Component {
             this.setState({
                 loggedIn: true
             });
+            sessionStorage.setItem("userId", userIdFortoken);
             sessionStorage.setItem("access-token", accessToken);
             this.props.history.push("/home");
             this.closeModalHandler();

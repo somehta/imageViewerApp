@@ -32,11 +32,8 @@ class Header extends Component{
         this.history.pushState("/");
     }
     
-     myAccountHandler = () =>{
+     myAccountHandler = () => {
     
-        if(this.state){
-    
-        }
     
       }
     render() {
