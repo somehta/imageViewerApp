@@ -134,7 +134,7 @@ class Home extends Component {
         const { classes } = this.props;
         return (
             <div>
-                <Header heading="Image Viewer" />
+                <Header heading="Image Viewer" searchIcon={true} history={this.props.history}/>
                 <div id="imageCardsContainer">
 
                     {this.state.allPostDetails.map((instaPost, index) => (
