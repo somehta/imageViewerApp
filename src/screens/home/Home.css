@@ -27,3 +27,36 @@
     cursor: pointer;
     background-image: url("../../assets/profileLogo.png");
 }
+
+.postHashTags{
+    color: blue;
+}
+
+.inactiveLike{
+    display:none !important;
+}
+
+.activeLike{
+    display:unset !important;
+}
+.likeFunctionContainer{
+    display: flex;
+}
+
+.numberOfLikesTag{
+    margin-top: 0;
+    margin-left: 15px;
+    font-weight: bold;
+}
+
+#unlikeIcon{
+    color: red;
+}
+
+.commentForm{
+    width: 80%;
+}
+
+.commentsBlock{
+    display: flex;
+}
