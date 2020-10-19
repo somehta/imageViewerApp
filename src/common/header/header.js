@@ -29,13 +29,13 @@ class Header extends Component{
         this.setState({
             loggedIn: false
         });
-        this.history.pushState("/");
+        this.props.history.push("/");
     }
     
-     myAccountHandler = () => {
-    
-    
-      }
+    myAccountHandler = () =>{
+        this.props.history.push("/profile");
+
+  }
     render() {
         const { anchorEl } = this.state;
         return(
@@ -47,10 +47,13 @@ class Header extends Component{
                     <div> </div>
                     :
                     <div id="loggedInUserSection">
-                            <div class="searchBox">
+                        {this.props.searchIcon ?
+                            <div className="searchBox">
                                 <SearchIcon fontSize="large" className="verticalAlign"/>
                                 <Input name="searchInput" placeholder="Search.." disableUnderline="false"></Input>                        
-                            </div>
+                            </div>:
+                            <div className="searchBox"></div>
+                        }
                             <IconButton aria-controls="simple-menu" aria-haspopup="true" onClick={this.handleMyProfileClick} size="medium" class="profileLogo"/>
                                 <Menu
                                 id="simple-menu"
