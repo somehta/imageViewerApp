@@ -1,4 +1,4 @@
-import React,{Component} from "react";
+import React, { Component } from "react";
 import "./Profile.css";
 import Header from '../../common/header/header';
 //import Typography from '@material-ui/core/Typography';
@@ -33,11 +33,11 @@ class Profile extends Component {
         this.state = {
             isLoggedIn: sessionStorage.getItem("access-token") == null ? false : true,
             allInsta: [],
-            postCount : 0,
+            postCount: 0,
             modalIsOpen: false,
             newName: "",
             fullNameRequired: "dispNone",
-            accessToken:sessionStorage.getItem("access-token"),
+            accessToken: sessionStorage.getItem("access-token"),
             imageModalIsOpen: false,
             currId: "",
             currImage: "",
@@ -55,59 +55,59 @@ class Profile extends Component {
 
     componentWillMount() {
         if (this.state.isLoggedIn) {
-        let that = this;
-        let data = null;
-        let xhrRequest = new XMLHttpRequest();
-        xhrRequest.addEventListener("readystatechange", function () {
-            if (this.readyState === 4) {
-                that.setState({
-                    allInsta: JSON.parse(this.responseText).data,
-                    postCount: JSON.parse(this.responseText).data.length
-                });
-                that.fetchPostDetails(JSON.parse(this.responseText).data);
-            }
-        })
+            let that = this;
+            let data = null;
+            let xhrRequest = new XMLHttpRequest();
+            xhrRequest.addEventListener("readystatechange", function () {
+                if (this.readyState === 4) {
+                    that.setState({
+                        allInsta: JSON.parse(this.responseText).data,
+                        postCount: JSON.parse(this.responseText).data.length
+                    });
+                    that.fetchPostDetails(JSON.parse(this.responseText).data);
+                }
+            })
 
-        xhrRequest.open("GET", this.props.baseUrl + "me/media?fields=id,caption&access_token=" +sessionStorage.getItem("access-token"));
-        xhrRequest.setRequestHeader("Cache-Control", "no-cache");
-        xhrRequest.send(data);
-    }
+            xhrRequest.open("GET", this.props.baseUrl + "me/media?fields=id,caption&access_token=" + sessionStorage.getItem("access-token"));
+            xhrRequest.setRequestHeader("Cache-Control", "no-cache");
+            xhrRequest.send(data);
+        }
     }
 
     fetchPostDetails = (apiResponse) => {
         let thisThat = this;
         let arrayOfDetails = [];
-        for(let newPostdetail of apiResponse){
+        for (let newPostdetail of apiResponse) {
             console.log(newPostdetail.id);
             let dataPost = null;
-        let xhrPostDetails = new XMLHttpRequest();
-        
-        xhrPostDetails.addEventListener("readystatechange", function () {
-            if (this.readyState === 4) {
-                let secondApiRespnse = JSON.parse(this.responseText);
-                let captionTitle = "";
-                let captionTags = "";
-                let originalCaption = (newPostdetail.caption);
-                if(originalCaption!=null){
-                captionTitle = originalCaption.substr(0, originalCaption.indexOf('#'));
-                captionTags = originalCaption.substr(originalCaption.indexOf('#')+0);
-                }
-                arrayOfDetails.push({id: newPostdetail.id, caption: captionTitle, tags: captionTags, username: secondApiRespnse.username, imageUrl: secondApiRespnse.media_url, timeStamp: secondApiRespnse.timestamp});
-                thisThat.setState({
-                    allPostDetails: arrayOfDetails
-                });
-                console.log(arrayOfDetails);
-            }
-        });
+            let xhrPostDetails = new XMLHttpRequest();
 
-        xhrPostDetails.open("GET", this.props.baseUrl +newPostdetail.id+"?fields=id,media_type,media_url,username,timestamp&access_token=" + sessionStorage.getItem("access-token"));
-        xhrPostDetails.setRequestHeader("Cache-Control", "no-cache");
-        xhrPostDetails.send(dataPost);
+            xhrPostDetails.addEventListener("readystatechange", function () {
+                if (this.readyState === 4) {
+                    let secondApiRespnse = JSON.parse(this.responseText);
+                    let captionTitle = "";
+                    let captionTags = "";
+                    let originalCaption = (newPostdetail.caption);
+                    if (originalCaption != null) {
+                        captionTitle = originalCaption.substr(0, originalCaption.indexOf('#'));
+                        captionTags = originalCaption.substr(originalCaption.indexOf('#') + 0);
+                    }
+                    arrayOfDetails.push({ id: newPostdetail.id, caption: captionTitle, tags: captionTags, username: secondApiRespnse.username, imageUrl: secondApiRespnse.media_url, timeStamp: secondApiRespnse.timestamp });
+                    thisThat.setState({
+                        allPostDetails: arrayOfDetails
+                    });
+                    console.log(arrayOfDetails);
+                }
+            });
+
+            xhrPostDetails.open("GET", this.props.baseUrl + newPostdetail.id + "?fields=id,media_type,media_url,username,timestamp&access_token=" + sessionStorage.getItem("access-token"));
+            xhrPostDetails.setRequestHeader("Cache-Control", "no-cache");
+            xhrPostDetails.send(dataPost);
         }
 
     }
 
-    editNameHandler = (e)=>{
+    editNameHandler = (e) => {
         this.setState({ newName: e.target.value });
 
     }
@@ -120,11 +120,11 @@ class Profile extends Component {
     }
     imageClickHandler = (image) => {
         var data = image.caption;
-        let caption="";
-        let tags="";
-        if(data!=null){
+        let caption = "";
+        let tags = "";
+        if (data != null) {
             caption = data.substr(0, data.indexOf('#'));
-            tags = data.substr(data.indexOf('#')+0);
+            tags = data.substr(data.indexOf('#') + 0);
         }
         this.setState({
             imageModalIsOpen: true,
@@ -132,7 +132,7 @@ class Profile extends Component {
             currImage: image.imageUrl,
             currImgName: "Sourabh Mehta",
             currCaption: caption,
-            currTags:tags,
+            currTags: tags,
             currLikeStatus: "",
             likeCounts: 1
         });
@@ -151,24 +151,24 @@ class Profile extends Component {
         this.setState({ modalIsOpen: false });
     }
 
-    render(){
+    render() {
         //const { classes } = this.props;
-        return(
+        return (
             <div>
-                <Header heading ="Image Viewer" searchIcon={false} history={this.props.history}/>
+                <Header heading="Image Viewer" searchIcon={false} history={this.props.history} />
                 <div className="container">
-                <div className="left">
-                <IconButton aria-controls="simple-menu" aria-haspopup="true" size="medium" class="profile"/>
-            </div>
-            <div className="right">
-                <div className="profileDetails">Sourabh Mehta </div>
-                <div className="profileDetails">
-                <div className="postDetails">Posts : {this.state.postCount}</div>
-                <div className="postDetails">Follows : 4</div>
-                <div className="postDetails">Folowed By : 6</div>
-            </div>
-            <div className="profileDetails">
-                {/* <Fab color="secondary" aria-label="edit" className={classes.fab} > */}
+                    <div className="left">
+                        <IconButton aria-controls="simple-menu" aria-haspopup="true" size="medium" class="profile" />
+                    </div>
+                    <div className="right">
+                        <div className="profileDetails">Sourabh Mehta </div>
+                        <div className="profileDetails">
+                            <div className="postDetails">Posts : {this.state.postCount}</div>
+                            <div className="postDetails">Follows : 4</div>
+                            <div className="postDetails">Folowed By : 6</div>
+                        </div>
+                        <div className="profileDetails">
+                            {/* <Fab color="secondary" aria-label="edit" className={classes.fab} > */}
                 Sourabh Mehta
                {/*</div> <EditIcon onClick={this.openModalHandler} />
                 </Fab>
@@ -182,45 +182,44 @@ class Profile extends Component {
                     <Button variant="contained" color="primary" onClick={this.editNameHandler}>UPDATE</Button>
         </Modal>
         </div>*/}
-        </div>
+                        </div>
+                    </div>
                 </div>
-                </div>
-            <div>
-            <GridList cellHeight={160} cols={3}>
-                                {this.state.allPostDetails != null && this.state.allPostDetails.map(post => (
-                                    <GridListTile
-                                        className="gridTile"
-                                        onClick={() => this.imageClickHandler(post)}
-                                        key={post.id}>
-                                        <img src={post.imageUrl}/>
-                                    </GridListTile>
-                                ))}
-                            </GridList>
-                            <Modal isOpen={this.state.imageModalIsOpen} ariaHideApp={false} className="image-modal" onRequestClose={this.closeImageModalHandler} >
-                                <div className="modalStyle">
-                                <div className="left">
+                <div>
+                    <GridList cellHeight={160} cols={3}>
+                        {this.state.allPostDetails != null && this.state.allPostDetails.map(post => (
+                            <GridListTile
+                                className="gridTile"
+                                onClick={() => this.imageClickHandler(post)}
+                                key={post.id}>
+                                <img src={post.imageUrl} />
+                            </GridListTile>
+                        ))}
+                    </GridList>
+                    <Modal isOpen={this.state.imageModalIsOpen} ariaHideApp={false} className="image-modal" onRequestClose={this.closeImageModalHandler} >
+                        <div className="modalStyle">
+                            <div className="left">
                                 <img className="clicked-image" src={this.state.currImage} alt={this.state.curImgName} />
-                                </div>
-                                <div className="right">
-                                 <div className="right-top">
-                                 <IconButton aria-controls="simple-menu" aria-haspopup="true" size="medium" class="profile" alt="No Image"/>
-                                 <span className="modal-username">Sourabh Mehta</span>
+                            </div>
+                            <div className="right">
+                                <div className="right-top">
+                                    <IconButton aria-controls="simple-menu" aria-haspopup="true" size="medium" class="profile" alt="No Image" />
+                                    <span className="modal-username">Sourabh Mehta</span>
                                     <hr />
-                                 </div>
-                                 <div className="right-middle">
-                                 <div >{this.state.currCaption}</div>
-                                 <div className="image-hashtags">{this.state.currTags}</div>
-                                 </div>
-                                 <div className="right-bottom">
-                                 </div>
                                 </div>
+                                <div className="right-middle">
+                                    <div >{this.state.currCaption}</div>
+                                    <div className="image-hashtags">{this.state.currTags}</div>
                                 </div>
-                            </Modal >
+                                <div className="right-bottom">
+                                </div>
+                            </div>
+                        </div>
+                    </Modal >
+                </div>
             </div>
-            </div>
-            )
-        }
+        )
     }
+}
 
- export default Profile;   
-    
+export default Profile;

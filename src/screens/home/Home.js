@@ -25,8 +25,6 @@ const styles = theme => ({
 
 class Home extends Component {
 
-    
-
     constructor() {
         super();
         this.state = {
@@ -38,8 +36,6 @@ class Home extends Component {
     }
 
     componentWillMount() {
-
-
         // Get all post from insta account
         let data = null;
         let xhr = new XMLHttpRequest();
@@ -86,7 +82,7 @@ class Home extends Component {
                     let hashTags = matches.map(function (x) { return " #" + x });
                     let commmentsArray = [];
 
-                    arrayOfDetails.push({ id: newPostdetail.id, caption: captionTitle, liked: false , initialLikes: 6, tags: hashTags, username: secondApiRespnse.username, imageUrl: secondApiRespnse.media_url, timeStamp: secondApiRespnse.timestamp, commentsList: commmentsArray });
+                    arrayOfDetails.push({ id: newPostdetail.id, caption: captionTitle, liked: false, initialLikes: 6, tags: hashTags, username: secondApiRespnse.username, imageUrl: secondApiRespnse.media_url, timeStamp: secondApiRespnse.timestamp, commentsList: commmentsArray });
                     thisThat.setState({
                         allPostDetails: arrayOfDetails
                     });
@@ -107,7 +103,7 @@ class Home extends Component {
         const currentState = tempPostsData[index].liked;
         tempPostsData[index].liked = !currentState;
         tempPostsData[index].initialLikes = tempPostsData[index].initialLikes + 1;
-        this.setState({allPostDetails: tempPostsData});
+        this.setState({ allPostDetails: tempPostsData });
     }
 
     unlikeClickHandler = (index) => {
@@ -115,18 +111,19 @@ class Home extends Component {
         const currentState = tempPostsData[index].liked;
         tempPostsData[index].liked = !currentState;
         tempPostsData[index].initialLikes = tempPostsData[index].initialLikes - 1;
-        this.setState({allPostDetails: tempPostsData});
+        this.setState({ allPostDetails: tempPostsData });
     }
 
-    inputCommentHandler = (event) =>{
-        this.setState({commentValue: event.target.value});
+    inputCommentHandler = (event) => {
+        this.setState({ commentValue: event.target.value });
     }
 
     addCommentHandler = (index, commentValue) => {
         const tempPostsData = this.state.allPostDetails;
-        var updatedComments = [...(tempPostsData[index].commentsList),(commentValue)];
+        var updatedComments = [...(tempPostsData[index].commentsList), (commentValue)];
         tempPostsData[index].commentsList = updatedComments;
-        this.setState({allPostDetails: tempPostsData,
+        this.setState({
+            allPostDetails: tempPostsData,
             commentValue: ""
         });
     }
@@ -134,7 +131,7 @@ class Home extends Component {
         const { classes } = this.props;
         return (
             <div>
-                <Header heading="Image Viewer" searchIcon={true} history={this.props.history}/>
+                <Header heading="Image Viewer" searchIcon={true} history={this.props.history} />
                 <div id="imageCardsContainer">
 
                     {this.state.allPostDetails.map((instaPost, index) => (
@@ -158,12 +155,12 @@ class Home extends Component {
                                 <h3>{instaPost.caption}</h3>
                                 <p class="postHashTags">{instaPost.tags}</p>
                                 <div class="likeFunctionContainer">
-                                <FavoriteBorderIcon id="likeIcon" className={instaPost.liked ? 'inactiveLike' : 'activeLike'} onClick={() => this.likeClickHandler(index)} />
-                                <FavoriteIcon id="unlikeIcon" className={instaPost.liked ? 'activeLike' : 'inactiveLike'} onClick={() => this.unlikeClickHandler(index)}/>
-                                <p class="numberOfLikesTag">{instaPost.initialLikes} likes</p>
-                                </div>     
-                                                     
-                                {instaPost.commentsList.map((commentPost) =>  (
+                                    <FavoriteBorderIcon id="likeIcon" className={instaPost.liked ? 'inactiveLike' : 'activeLike'} onClick={() => this.likeClickHandler(index)} />
+                                    <FavoriteIcon id="unlikeIcon" className={instaPost.liked ? 'activeLike' : 'inactiveLike'} onClick={() => this.unlikeClickHandler(index)} />
+                                    <p class="numberOfLikesTag">{instaPost.initialLikes} likes</p>
+                                </div>
+
+                                {instaPost.commentsList.map((commentPost) => (
                                     <div class="commentsBlock">
                                         <p class="userOfComment"><b>{instaPost.username}: &nbsp;</b></p>
                                         <p class="commentPost"> {commentPost}</p>
@@ -171,10 +168,10 @@ class Home extends Component {
 
                                 )
 
-                                )} 
+                                )}
                                 <FormControl className={classes.formControl}>
                                     <InputLabel htmlFor="addCommentLabel">Add a comment</InputLabel>
-                                    <Input id="commentText" onChange={this.inputCommentHandler}/>
+                                    <Input id="commentText" onChange={this.inputCommentHandler} />
                                 </FormControl>
                                 <Button variant="contained" color="primary" onClick={() => this.addCommentHandler(index, this.state.commentValue)}>ADD </Button>
                             </CardContent>
