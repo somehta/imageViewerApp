@@ -1,0 +1,56 @@
+.profileDetails{
+    display: flex;
+    align-items: center;
+    justify-content: left; 
+    padding-bottom: 10px;
+}
+
+.profile{
+    width: 60px;
+    height: 50px;
+    background-size: contain;
+    border: transparent;
+    cursor: pointer;
+    background-image: url("../../assets/profileLogo.png");
+    margin-left: 35%;
+    margin-top: 1%;
+}
+
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    flex-direction: row;
+}
+
+.left{
+    margin: -2px 42px -2px 2px;
+}
+
+.right{
+    margin: 12px 2px 2px 2px;
+    display: flex;
+    align-items: top;
+    justify-content: top; 
+    flex-direction: column;
+}
+
+.right-top
+{
+    padding-top: 2px;
+}
+.postDetails{
+    padding-right: 60px;
+}
+.modalStyle {
+    width: 800;
+    height: 400;
+    margin-Top: 100;
+    margin-Left: 300;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    flex-direction: row;
+}
+
+
